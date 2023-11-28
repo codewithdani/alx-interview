@@ -12,7 +12,7 @@ def pascal_triangle(n):
     Returns:
     - List[List[int]]: A list of lists representing Pascal's triangle.
     """
-    if n <= 0:
+    if type(n) is not int or n <= 0:
         return []
 
     p_triangle = [[1]]
