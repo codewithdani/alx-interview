@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-# This line specifies the interpreter to use for this script.
+"""
+ This line specifies the interpreter to use for this script.
+"""
 
 
 def minOperations(n):
-    """
-  This function calculates the fewest number of
+    """ This function calculates the fewest number of
   operations needed to result in exactly
   n H characters in the file.
 
@@ -12,26 +13,52 @@ def minOperations(n):
     the fewest number of operations needed,
     or 0 if n is impossible to achieve.
     """
-    # Base cases
-    if n == 0:
-        # If n is 0, no operations are needed.
-        return 0
-    elif n == 1:
-        # If n is 1, only one operation (Copy All) is needed.
-        return 1
+    num_chars = 1  # chars in the file
+    copy = 0  # how many H's copied
+    operations_counter = 0  # operations counter
 
-    """ Recursively calculate the minimum number of
-     operations for n-1 and n/2 characters
-     """
-    min_n_1 = minOperations(n-1)
-    # Store the minimum operations for n-1 characters in a variable.
-    min_n_2 = minOperations(n//2)
-    # Store the minimum operations for n/2 characters in a variable.
+    while num_chars < n:
+        # if did not copy anything yet
+        if copy == 0:
+            # copyall
+            copy = num_chars
+            # increment operations counter
+            operations_counter += 1
 
-    # Choose the minimum of the two options
-    if n % 2 == 0:
-        # If n is even
-        return min(min_n_1 + 1, min_n_2 + 2)
+        # if haven't pasted anything yet
+        if num_chars == 1:
+            # paste
+            num_chars += copy
+            # increment operations counter
+            operations_counter += 1
+            # continue to next loop
+            continue
+
+        remaining = n - num_chars  # remaining chars to Paste
+        # check if impossible by checking if copy
+        # has more than needed to reach the number desired
+        # which also means num of chars in file is equal
+        # or more than in the copy.
+        # in both situations it's impossible to achieve n of chars
+        if remaining < copy:
+            return 0
+
+        # if can't be devided
+        if remaining % num_chars != 0:
+            # paste current copy
+            num_chars += copy
+            # increment operations counter
+            operations_counter += 1
+        else:
+            # copyall
+            copy = num_chars
+            # paste
+            num_chars += copy
+            # increment operations counter
+            operations_counter += 2
+
+    # if got the desired result
+    if num_chars == n:
+        return operations_counter
     else:
-        # If n is odd, only Option 1 is possible.
-        return min_n_1 + 1
+        return 0
