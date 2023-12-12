@@ -26,7 +26,6 @@ def minOperations(n):
     min_n_2 = minOperations(n//2)
     # Store the minimum operations for n/2 characters in a variable.
 
-
     # Choose the minimum of the two options
     if n % 2 == 0:
         # If n is even
@@ -34,4 +33,3 @@ def minOperations(n):
     else:
         # If n is odd, only Option 1 is possible.
         return min_n_1 + 1
-
