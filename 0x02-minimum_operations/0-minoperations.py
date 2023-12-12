@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # This line specifies the interpreter to use for this script.
 
+
 def minOperations(n):
     """
   This function calculates the fewest number of
@@ -19,8 +20,9 @@ def minOperations(n):
         # If n is 1, only one operation (Copy All) is needed.
         return 1
 
-    # Recursively calculate the minimum number of
-    # operations for n-1 and n/2 characters
+    """ Recursively calculate the minimum number of
+     operations for n-1 and n/2 characters
+     """
     min_n_1 = minOperations(n-1)
     # Store the minimum operations for n-1 characters in a variable.
     min_n_2 = minOperations(n//2)
