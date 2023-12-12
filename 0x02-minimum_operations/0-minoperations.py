@@ -26,3 +26,4 @@ def minOperations(n):
         return min(min_n_1 + 1, min_n_/2 + 2)
     else:
         return min_n_1 + 1
+
