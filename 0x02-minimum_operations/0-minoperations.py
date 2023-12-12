@@ -23,14 +23,14 @@ def minOperations(n):
     # operations for n-1 and n/2 characters
     min_n_1 = minOperations(n-1)
     # Store the minimum operations for n-1 characters in a variable.
-    min_n_/2 = minOperations(n//2)
+    min_n_2 = minOperations(n//2)
     # Store the minimum operations for n/2 characters in a variable.
 
 
     # Choose the minimum of the two options
     if n % 2 == 0:
         # If n is even
-        return min(min_n_1 + 1, min_n_/2 + 2)
+        return min(min_n_1 + 1, min_n_2 + 2)
     else:
         # If n is odd, only Option 1 is possible.
         return min_n_1 + 1
