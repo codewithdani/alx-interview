@@ -14,15 +14,15 @@ def is_safe(board, row, col):
     return True
 
 
-def solve_n_queens_util(board, row, n):
+def solve_n_queens_util(board, row, n, solutions):
     if row == n:
         """ All queens are placed successfully, print the solution """
-        print(" ".join(str(col) for col in board))
+        solutions.append([[i, board[i]] for i in range(n)])
     else:
         for col in range(n):
             if is_safe(board, row, col):
                 board[row] = col
-                solve_n_queens_util(board, row + 1, n)
+                solve_n_queens_util(board, row + 1, n, solutions)
                 """ Backtrack """
                 board[row] = -1
 
@@ -30,7 +30,9 @@ def solve_n_queens_util(board, row, n):
 def solve_n_queens(n):
     """ Initialize an empty board """
     board = [-1] * n
-    solve_n_queens_util(board, 0, n)
+    solutions = []
+    solve_n_queens_util(board, 0, n, solutions)
+    return solutions
 
 
 if __name__ == "__main__":
@@ -49,7 +51,9 @@ if __name__ == "__main__":
             sys.exit(1)
 
         """ Solve and print solutions """
-        solve_n_queens(n)
+        solutions = solve_n_queens(n)
+        for solution in solutions:
+            print(solution)
 
     except ValueError:
         print("N must be a number")
